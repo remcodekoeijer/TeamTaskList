@@ -2,13 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TeamTaskList"
-             x:Class="TeamTaskList.MainPage">
+             x:Class="TeamTaskList.MainPage"
+             Title="Team Task List!"
+             BackgroundColor="#E0BCB9">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add New" />
+        <ToolbarItem Text="Refresh" />
+    </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Label x:Name="header" Text="Team Task List!"/>
+        <ScrollView>
+            <Grid x:Name="gridTasks"></Grid>
+        </ScrollView>
     </StackLayout>
+
 
 </ContentPage>
