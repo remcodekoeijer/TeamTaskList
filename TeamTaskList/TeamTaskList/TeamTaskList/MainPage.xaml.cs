@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamTaskList.Controls;
 using TeamTaskList.Data;
 using TeamTaskList.Models;
 using Xamarin.Forms;
@@ -53,23 +54,27 @@ namespace TeamTaskList
         {
             for (int i = 0; i < numberOfTasks; i++)
             {
-                //gridTasks.Children.Add(new Label
+                TaskNoteControl taskControl = new TaskNoteControl()
+                {
+                    TaskTitle = taskModels[i].Title,
+                    TaskDescription = taskModels[i].Description,
+                    Margin = 10,
+                };
+                taskControl.ClassId = "Task-" + taskModels[i].Id;
+                gridTasks.Children.Add(taskControl, i % maxColumns, i / maxColumns);
+                taskControl.ClickedTask += OnClickedCustom;
+
+                //Button btn = new Button()
                 //{
                 //    Text = taskModels[i].Title + "\n" + taskModels[i].Description,
-                //    HorizontalOptions = LayoutOptions.Center,
+                //    BackgroundColor = Color.FromHex("#AA4139"),
+                //    Margin = 10,
+                //    HeightRequest = 150
+                //};
+                //btn.ClassId = "Task-" + taskModels[i].Id;
+                //gridTasks.Children.Add(btn, i % maxColumns, i / maxColumns);
 
-                //}, i % maxColumns, i / maxColumns);
-                Button btn = new Button()
-                {
-                    Text = taskModels[i].Title + "\n" + taskModels[i].Description,
-                    BackgroundColor = Color.FromHex("#AA4139"),
-                    Margin = 10,
-                    HeightRequest = 150
-                };
-                btn.ClassId = "Task-" + taskModels[i].Id;
-                gridTasks.Children.Add(btn, i % maxColumns, i / maxColumns);
-
-                btn.Clicked += OnClicked;
+                //btn.Clicked += OnClicked;
             }
         }
 
@@ -86,6 +91,8 @@ namespace TeamTaskList
         
         private void RefreshTasks()
         {
+            //TODO 
+            //Instead of clearing list and repopulating, find the button that was changed and update that one. If possible. (somehow save the (class)id of the button and reuse here?)
             gridTasks.Children.Clear();
             PopulateGrid();
         }
@@ -95,6 +102,13 @@ namespace TeamTaskList
             Button sendBtn = (Button)sender;
             //TODO; make a check to se eif it is a number
             int taskId = int.Parse(sendBtn.ClassId.Split('-')[1]);
+            await Navigation.PushAsync(new TaskDetailPage(taskId));
+        }
+        private async void OnClickedCustom(object s, EventArgs e)
+        {
+            TaskNoteControl sender = (TaskNoteControl)s;
+            //TODO; make a check to se eif it is a number
+            int taskId = int.Parse(sender.ClassId.Split('-')[1]);
             await Navigation.PushAsync(new TaskDetailPage(taskId));
         }
     }

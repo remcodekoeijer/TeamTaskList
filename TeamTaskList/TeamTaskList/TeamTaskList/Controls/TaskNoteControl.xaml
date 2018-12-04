@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeamTaskList.Controls.TaskNoteControl">
+  <ContentView.Content>
+      
+        <Frame CornerRadius="7" HasShadow="False" OutlineColor="Black" BackgroundColor="Yellow">
+            <StackLayout>
+                <Label x:Name="taskTitle" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+                <Label x:Name="taskDescription" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+            </StackLayout>
+        </Frame>
+      
+  </ContentView.Content>
+</ContentView>

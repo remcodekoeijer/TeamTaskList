@@ -22,13 +22,28 @@ namespace TeamTaskList.Data
             Random rand = new Random();
             for (int i = 0; i < numberOfTasks; i++)
             {
-                TaskModel task = new TaskModel()
+                TaskModel task;
+                if(i % 3 == 0)
                 {
-                    Id = i,
-                    Title = "Task " + i,
-                    Description = "This is some sort of task. This describes what you have to do.",
-                    Priority = rand.Next(1, 5)                    
-                };
+                    task = new TaskModel()
+                    {
+                        Id = i,
+                        Title = "Task " + i,
+                        Description = "This is some sort of task. This describes what you have to do.",
+                        Priority = rand.Next(1, 5)
+                    };
+                }
+                else
+                {
+                    task = new TaskModel()
+                    {
+                        Id = i,
+                        Title = "Task " + i,
+                        Description = "This is some sort of task. This describes what you have to do. As a follow up, this is just some added text to see what happens with very long descriptions. Will it stretch up the control? That is the question",
+                        Priority = rand.Next(1, 5)
+                    };
+                }
+
                 taskList.Add(task);
             }
         }
