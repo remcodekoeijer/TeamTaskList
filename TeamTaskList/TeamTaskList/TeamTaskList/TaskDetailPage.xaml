@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeamTaskList.TaskDetailPage"
+             Title="Edit Task">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Revert" Clicked="OnRevertTask"/>
+        <ToolbarItem Text="Edit" Clicked="OnEditTask"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="taskIdLabel" Text="Task Id: "/>
+
+            <Label x:Name="taskTitleLabel" Text="Title: "/>
+            <Entry x:Name="taskTitleEntry" Placeholder="Enter title"/>
+
+            <Label x:Name="taskDescriptionLabel" Text="Description: "/>
+            <Editor x:Name="taskDescriptionEntry"/>
+
+            <Label x:Name="taskPriorityLabel" Text="Priority: "/>
+            <Entry x:Name="taskPriorityEntry" Placeholder="Enter priority" Keyboard="Numeric"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

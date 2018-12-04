@@ -12,14 +12,24 @@ namespace TeamTaskList
     public partial class MainPage : ContentPage
     {
         private int maxColumns = 2;
-        private List<TaskModel> taskModels = TaskSampleData.GetTaskModels();
+
+        private TaskSampleData taskSampleDataInstance = TaskSampleData.GetInstance();
+        private List<TaskModel> taskModels;
+        private int numberOfTasks;
 
         public MainPage()
         {
+            taskModels = taskSampleDataInstance.GetTaskModels();
             BindingContext = taskModels;
             InitializeComponent();
 
-            int numberOfrows = (taskModels.Count / maxColumns) + 1;
+            numberOfTasks = taskModels.Count;
+
+            int numberOfrows;
+            if (numberOfTasks % 2 != 0)
+                numberOfrows = (numberOfTasks / maxColumns) + 1;
+            else
+                numberOfrows = numberOfTasks / maxColumns;
 
             for (int i = 0; i < numberOfrows; i++)
             {
@@ -41,7 +51,7 @@ namespace TeamTaskList
 
         private void PopulateGrid()
         {
-            for (int i = 0; i < taskModels.Count; i++)
+            for (int i = 0; i < numberOfTasks; i++)
             {
                 //gridTasks.Children.Add(new Label
                 //{
@@ -56,20 +66,36 @@ namespace TeamTaskList
                     Margin = 10,
                     HeightRequest = 150
                 };
-                btn.ClassId = "Task" + taskModels[i].Id;
+                btn.ClassId = "Task-" + taskModels[i].Id;
                 gridTasks.Children.Add(btn, i % maxColumns, i / maxColumns);
 
-                btn.Clicked += delegate (object sender, EventArgs e)
-                {
-                    Button sendBtn = (Button)sender;
-                    ChangeHeader(sendBtn.ClassId);
-                };
+                btn.Clicked += OnClicked;
             }
         }
 
-        private void ChangeHeader(string text)
+        protected override void OnAppearing()
         {
-            header.Text = text;
+            base.OnAppearing();
+            RefreshTasks();
+        }
+
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            RefreshTasks();
+        }
+        
+        private void RefreshTasks()
+        {
+            gridTasks.Children.Clear();
+            PopulateGrid();
+        }
+
+        private async void OnClicked(object sender, EventArgs e)
+        {
+            Button sendBtn = (Button)sender;
+            //TODO; make a check to se eif it is a number
+            int taskId = int.Parse(sendBtn.ClassId.Split('-')[1]);
+            await Navigation.PushAsync(new TaskDetailPage(taskId));
         }
     }
 }

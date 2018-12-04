@@ -7,7 +7,7 @@
              BackgroundColor="#E0BCB9">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add New" />
-        <ToolbarItem Text="Refresh" />
+        <ToolbarItem Text="Refresh" Clicked="OnRefresh"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>

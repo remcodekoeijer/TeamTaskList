@@ -7,10 +7,17 @@ namespace TeamTaskList.Data
 {
     public class TaskSampleData
     {
-        static List<TaskModel> taskList = new List<TaskModel>();
-        static int numberOfTasks = 100;
+        private static TaskSampleData instance = new TaskSampleData();
+        private List<TaskModel> taskList;
+        private int numberOfTasks = 30;
 
-        private static void PopulateList()
+        private TaskSampleData()
+        {
+            taskList = new List<TaskModel>();
+            PopulateList();
+        }
+
+        private void PopulateList()
         {
             Random rand = new Random();
             for (int i = 0; i < numberOfTasks; i++)
@@ -26,10 +33,26 @@ namespace TeamTaskList.Data
             }
         }
 
-        public static List<TaskModel> GetTaskModels()
+        public static TaskSampleData GetInstance()
         {
-            PopulateList();
+            return instance;
+        }
+
+        public List<TaskModel> GetTaskModels()
+        {
             return taskList;
+        }
+        public void UpdateTask(TaskModel update)
+        {
+            foreach(var task in taskList)
+            {
+                if(update.Id == task.Id)
+                {
+                    task.Title = update.Title;
+                    task.Description = update.Description;
+                    task.Priority = update.Priority;
+                }
+            }
         }
     }
 }
