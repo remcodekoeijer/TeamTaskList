@@ -4,9 +4,9 @@
              xmlns:local="clr-namespace:TeamTaskList"
              x:Class="TeamTaskList.MainPage"
              Title="Team Task List!"
-             BackgroundColor="#E0BCB9">
+             BackgroundColor="#FFFFFF">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add New" />
+        <ToolbarItem Text="Add New" Clicked="OnAddTask"/>
         <ToolbarItem Text="Refresh" Clicked="OnRefresh"/>
     </ContentPage.ToolbarItems>
 

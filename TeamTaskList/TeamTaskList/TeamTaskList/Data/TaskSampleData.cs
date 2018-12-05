@@ -10,6 +10,7 @@ namespace TeamTaskList.Data
         private static TaskSampleData instance = new TaskSampleData();
         private List<TaskModel> taskList;
         private int numberOfTasks = 30;
+        private int id = 0;
 
         private TaskSampleData()
         {
@@ -28,7 +29,7 @@ namespace TeamTaskList.Data
                     task = new TaskModel()
                     {
                         Id = i,
-                        Title = "Task " + i,
+                        Title = "Task with a longer name " + i,
                         Description = "This is some sort of task. This describes what you have to do.",
                         Priority = rand.Next(1, 5)
                     };
@@ -43,7 +44,7 @@ namespace TeamTaskList.Data
                         Priority = rand.Next(1, 5)
                     };
                 }
-
+                id++;
                 taskList.Add(task);
             }
         }
@@ -56,6 +57,13 @@ namespace TeamTaskList.Data
         public List<TaskModel> GetTaskModels()
         {
             return taskList;
+        }
+
+        public void AddTask(TaskModel newTask)
+        {
+            id++;
+            newTask.Id = id;
+            taskList.Add(newTask);
         }
         public void UpdateTask(TaskModel update)
         {

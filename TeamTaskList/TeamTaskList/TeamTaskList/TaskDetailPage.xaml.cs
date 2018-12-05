@@ -35,13 +35,17 @@ namespace TeamTaskList
             base.OnAppearing();
         }
 
-        async void OnEditTask(object sender, EventArgs e)
+        async void OnSaveTask(object sender, EventArgs e)
         {
             if(string.IsNullOrWhiteSpace(taskTitleEntry.Text) ||
                 string.IsNullOrWhiteSpace(taskDescriptionEntry.Text) ||
                 string.IsNullOrWhiteSpace(taskPriorityEntry.Text))
             {
                 await DisplayAlert("Missing Information", "You must fill out all fields.", "OK");
+            }
+            else if (!int.TryParse(taskPriorityEntry.Text, out int result))
+            {
+                await DisplayAlert("Wrong value", "Priority needs to be a non-decimal numeric value", "OK");
             }
             else
             {
@@ -56,6 +60,7 @@ namespace TeamTaskList
                         Priority = int.Parse(taskPriorityEntry.Text)
                     };
                     taskSampleDataInstance.UpdateTask(editedTask);
+                    MainPage.TaskIsEdited = true;
                     await Navigation.PopAsync();
                 }
             }

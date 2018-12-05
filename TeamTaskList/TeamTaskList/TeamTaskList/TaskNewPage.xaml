@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TeamTaskList.TaskDetailPage"
-             Title="Edit Task">
+             x:Class="TeamTaskList.TaskNewPage"
+             Title="New Task">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Revert" Clicked="OnRevertTask"/>
+        <ToolbarItem Text="Cancel" Clicked="OnCancel"/>
         <ToolbarItem Text="Save" Clicked="OnSaveTask"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="taskIdLabel" Text="Task Id: "/>
-
+            
             <Label x:Name="taskTitleLabel" Text="Title: "/>
             <Entry x:Name="taskTitleEntry" Placeholder="Enter title"/>
 

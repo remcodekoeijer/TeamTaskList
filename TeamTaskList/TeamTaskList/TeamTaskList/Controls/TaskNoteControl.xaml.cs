@@ -30,6 +30,15 @@ namespace TeamTaskList.Controls
             set { SetValue(TaskDescriptionProperty, value); }
         }
 
+        public static readonly BindableProperty TaskPriorityProperty =
+            BindableProperty.Create("TaskPriority", typeof(string), typeof(TaskNoteControl), default(string));
+
+        public string TaskPriority
+        {
+            get { return (string)GetValue(TaskPriorityProperty); }
+            set { SetValue(TaskPriorityProperty, value); }
+        }
+
         public event EventHandler ClickedTask;
 
         public TaskNoteControl()
@@ -38,6 +47,7 @@ namespace TeamTaskList.Controls
 
             taskTitle.SetBinding(Label.TextProperty, new Binding("TaskTitle", source: this));
             taskDescription.SetBinding(Label.TextProperty, new Binding("TaskDescription", source: this));
+            taskPriority.SetBinding(Label.TextProperty, new Binding("TaskPriority", source: this));
 
             this.GestureRecognizers.Add(new TapGestureRecognizer
             {

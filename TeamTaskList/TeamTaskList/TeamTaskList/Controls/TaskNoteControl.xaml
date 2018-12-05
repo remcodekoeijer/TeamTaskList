@@ -4,10 +4,13 @@
              x:Class="TeamTaskList.Controls.TaskNoteControl">
   <ContentView.Content>
       
-        <Frame CornerRadius="7" HasShadow="False" OutlineColor="Black" BackgroundColor="Yellow">
+        <Frame CornerRadius="7" HasShadow="True" OutlineColor="Black" BackgroundColor="Yellow">
             <StackLayout>
-                <Label x:Name="taskTitle" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
-                <Label x:Name="taskDescription" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="taskTitle" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="taskPriority" VerticalOptions="Start" HorizontalOptions="End"/>
+                </StackLayout>
+                <Label x:Name="taskDescription" VerticalOptions="Start" HorizontalOptions="StartAndExpand" FontSize="Micro" />
             </StackLayout>
         </Frame>
       
