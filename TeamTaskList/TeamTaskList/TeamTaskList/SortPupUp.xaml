@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeamTaskList.SortPupUp"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+
+    <StackLayout Padding="20, 20, 20, 20" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        <Button Text="Click me!"
+                Clicked="Button_Clicked"/>
+    </StackLayout>
+    
+</pages:PopupPage>

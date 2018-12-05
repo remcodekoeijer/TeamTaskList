@@ -4,10 +4,11 @@
              xmlns:local="clr-namespace:TeamTaskList"
              x:Class="TeamTaskList.MainPage"
              Title="Team Task List!"
-             BackgroundColor="#FFFFFF">
+             BackgroundColor="#FFFFFF" >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add New" Clicked="OnAddTask"/>
-        <ToolbarItem Text="Refresh" Clicked="OnRefresh"/>
+        <ToolbarItem Text="Add New" Priority="0" Order="Primary" Clicked="OnAddTask"/>
+        <ToolbarItem Text="Refresh" Priority="1" Order="Primary" Clicked="OnRefresh"/>
+        <ToolbarItem Text="Sort" Priority="0" Order="Secondary" Clicked="OnSort"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>

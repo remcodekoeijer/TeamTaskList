@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -91,6 +92,7 @@ namespace TeamTaskList
                             taskNote.TaskTitle = task.Title;
                             taskNote.TaskDescription = task.Description;
                             taskNote.TaskPriority = task.Priority.ToString();
+                            return;
                         }
                     }
                 }
@@ -189,13 +191,18 @@ namespace TeamTaskList
             await Navigation.PushAsync(new TaskNewPage());
         }
 
-        private async void OnTaskClicked(object s, EventArgs e)
+        private async void OnTaskClicked(object sender, EventArgs e)
         {
-            TaskNoteControl sender = (TaskNoteControl)s;
+            TaskNoteControl se = (TaskNoteControl)sender;
             //TODO; make a check to see if it is a number
-            int taskId = int.Parse(sender.ClassId);
+            int taskId = int.Parse(se.ClassId);
             lastTaskIdSent = taskId;
             await Navigation.PushAsync(new TaskDetailPage(taskId));
+        }
+
+        private void OnSort(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new SortPupUp());
         }
     }
 }
