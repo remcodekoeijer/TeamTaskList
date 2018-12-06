@@ -1,5 +1,4 @@
-﻿using Rg.Plugins.Popup.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +19,7 @@ namespace TeamTaskList
         private List<TaskModel> taskModels;
         public static bool TaskIsEdited { get; set; }
         public static bool TaskIsAdded { get; set; }
+        public static bool Sorted { get; set; }
         private int lastTaskIdSent = -1;
 
         public MainPage()
@@ -50,12 +50,15 @@ namespace TeamTaskList
                 RefreshEditedTask();
                 TaskIsEdited = false;
             }
+            if (Sorted)
+            {
+                RefreshAllTasks();
+                Sorted = false;
+            }
         }
 
         private void RefreshAllTasks()
         {
-            //TODO 
-            //Instead of clearing list and repopulating, find the button that was changed and update that one. If possible. (somehow save the (class)id of the button and reuse here?)
             gridTasks.Children.Clear();
             PopulateGrid();
         }
@@ -114,7 +117,7 @@ namespace TeamTaskList
             {
                 gridTasks.RowDefinitions.Add(new RowDefinition()
                 {
-                    Height = GridLength.Star
+                    Height = GridLength.Auto
                 });
             }
             for (int i = 0; i < maxColumns; i++)
@@ -140,7 +143,7 @@ namespace TeamTaskList
             {
                 gridTasks.RowDefinitions.Add(new RowDefinition()
                 {
-                    Height = GridLength.Star
+                    Height = GridLength.Auto
                 });
             }
         }
@@ -186,7 +189,7 @@ namespace TeamTaskList
         {
             //For more information: https://www.youtube.com/watch?v=dOU0Qei3Qlk 
             //And https://github.com/HoussemDellai/Xamarin-Forms-Popup-Demo
-            await PopupNavigation.Instance.PushAsync(new SortPupUp());
+            await Navigation.PushModalAsync(new NavigationPage(new SortPupUp()));
         }
     }
 }

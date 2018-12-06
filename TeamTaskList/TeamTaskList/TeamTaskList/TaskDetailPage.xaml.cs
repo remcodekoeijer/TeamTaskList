@@ -35,7 +35,15 @@ namespace TeamTaskList
                 taskIdLabel.Text = "Task ID: " + oldTask.Id.ToString();
                 taskTitleEntry.Text = oldTask.Title;
                 taskDescriptionEntry.Text = oldTask.Description;
-                taskPriorityEntry.Text = oldTask.Priority.ToString();
+
+                for(int i = 0; i < taskPriorityPicker.Items.Count; i++)
+                {
+                    //Set the picker to the value of the taskId priority
+                    if (int.Parse(taskPriorityPicker.Items[i]) == oldTask.Priority)
+                    {
+                        taskPriorityPicker.SelectedIndex = i;
+                    }
+                }
             }
             else
             {
@@ -47,11 +55,11 @@ namespace TeamTaskList
         {
             if(string.IsNullOrWhiteSpace(taskTitleEntry.Text) ||
                 string.IsNullOrWhiteSpace(taskDescriptionEntry.Text) ||
-                string.IsNullOrWhiteSpace(taskPriorityEntry.Text))
+                taskPriorityPicker.SelectedIndex == -1)
             {
                 await DisplayAlert("Missing Information", "You must fill out all fields.", "OK");
             }
-            else if (!int.TryParse(taskPriorityEntry.Text, out int result))
+            else if (!int.TryParse(taskPriorityPicker.Items[taskPriorityPicker.SelectedIndex], out int result))
             {
                 await DisplayAlert("Wrong value", "Priority needs to be a non-decimal numeric value", "OK");
             }
@@ -65,7 +73,7 @@ namespace TeamTaskList
                         Id = oldTask.Id,
                         Title = taskTitleEntry.Text,
                         Description = taskDescriptionEntry.Text,
-                        Priority = int.Parse(taskPriorityEntry.Text)
+                        Priority = int.Parse(taskPriorityPicker.Items[taskPriorityPicker.SelectedIndex])
                     };
                     taskSampleDataInstance.UpdateTask(editedTask);
                     MainPage.TaskIsEdited = true;
@@ -78,7 +86,14 @@ namespace TeamTaskList
         {
             taskTitleEntry.Text = oldTask.Title;
             taskDescriptionEntry.Text = oldTask.Description;
-            taskPriorityEntry.Text = oldTask.Priority.ToString();
+            for (int i = 0; i < taskPriorityPicker.Items.Count; i++)
+            {
+                //Set the picker to the value of the taskId priority
+                if (int.Parse(taskPriorityPicker.Items[i]) == oldTask.Priority)
+                {
+                    taskPriorityPicker.SelectedIndex = i;
+                }
+            }
         }
 
         private async void TaskNotFound()

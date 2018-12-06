@@ -17,8 +17,15 @@
             <Label x:Name="taskDescriptionLabel" Text="Description: "/>
             <Editor x:Name="taskDescriptionEntry"/>
 
-            <Label x:Name="taskPriorityLabel" Text="Priority: "/>
-            <Entry x:Name="taskPriorityEntry" Placeholder="Enter priority" Keyboard="Numeric"/>
+            <Picker x:Name="taskPriorityPicker" Title="Priority">
+                <Picker.Items>
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                    <x:String>4</x:String>
+                    <x:String>5</x:String>
+                </Picker.Items>
+            </Picker>
 
         </StackLayout>
     </ContentPage.Content>

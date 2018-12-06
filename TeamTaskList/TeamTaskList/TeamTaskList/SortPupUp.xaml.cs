@@ -1,5 +1,4 @@
-﻿using Rg.Plugins.Popup.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ using TeamTaskList.Data;
 namespace TeamTaskList
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SortPupUp
+	public partial class SortPupUp : ContentPage
 	{
         TaskSampleData instance = TaskSampleData.GetInstance();
 		public SortPupUp ()
@@ -31,8 +30,9 @@ namespace TeamTaskList
                 string whatToSort = whatSort.Items[whatSortIndex];
                 string howToSort = howSort.Items[howSortIndex];
                 SendSort(whatToSort, howToSort);
+                MainPage.Sorted = true;
 
-                await PopupNavigation.Instance.PopAsync(true);
+                await Navigation.PopModalAsync();
             }
             else
             {

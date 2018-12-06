@@ -51,8 +51,7 @@ namespace TeamTaskList.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-
-                Rg.Plugins.Popup.Popup.Init();
+                
                 Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
