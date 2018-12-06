@@ -8,6 +8,18 @@
         <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
+        <Picker x:Name="whatSort" Title="What to sort?">
+            <Picker.Items>
+                <x:String>Title</x:String>
+                <x:String>Priority</x:String>
+            </Picker.Items>
+        </Picker>
+        <Picker x:Name="howSort" Title="How to sort?">
+            <Picker.Items>
+                <x:String>Ascending</x:String>
+                <x:String>Descending</x:String>
+            </Picker.Items>
+        </Picker>
         <Button Text="Click me!"
                 Clicked="Button_Clicked"/>
     </StackLayout>

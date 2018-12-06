@@ -18,21 +18,29 @@ namespace TeamTaskList
         private TaskModel oldTask;
         private TaskModel editedTask;
         private TaskSampleData taskSampleDataInstance = TaskSampleData.GetInstance();
+        private int taskId;
 
         public TaskDetailPage(int taskId)
         {
             InitializeComponent();
-
-            oldTask = taskSampleDataInstance.GetTaskModels()[taskId];
-            taskIdLabel.Text = "Task ID: " + oldTask.Id.ToString();
-            taskTitleEntry.Text = oldTask.Title;
-            taskDescriptionEntry.Text = oldTask.Description;
-            taskPriorityEntry.Text = oldTask.Priority.ToString();
+            this.taskId = taskId;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (taskSampleDataInstance.GetTaskModelById(taskId, out oldTask))
+            {
+                taskIdLabel.Text = "Task ID: " + oldTask.Id.ToString();
+                taskTitleEntry.Text = oldTask.Title;
+                taskDescriptionEntry.Text = oldTask.Description;
+                taskPriorityEntry.Text = oldTask.Priority.ToString();
+            }
+            else
+            {
+                TaskNotFound();
+            }
         }
 
         async void OnSaveTask(object sender, EventArgs e)
@@ -71,6 +79,12 @@ namespace TeamTaskList
             taskTitleEntry.Text = oldTask.Title;
             taskDescriptionEntry.Text = oldTask.Description;
             taskPriorityEntry.Text = oldTask.Priority.ToString();
+        }
+
+        private async void TaskNotFound()
+        {
+            await DisplayAlert("Task Not Found", "The requested task is not found.", "OK");
+            await Navigation.PopAsync();
         }
     }
 }

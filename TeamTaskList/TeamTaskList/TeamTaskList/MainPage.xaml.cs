@@ -25,14 +25,10 @@ namespace TeamTaskList
         public MainPage()
         {
             taskModels = taskSampleDataInstance.GetTaskModels();
-            BindingContext = taskModels;
+            //BindingContext = taskModels;
             InitializeComponent();
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            
             RefreshAllTasks();
-            stopwatch.Stop();
-            ChangeHeader("Refresh all task time: " + stopwatch.Elapsed.ToString());
         }
 
         public void ChangeHeader(string newText)
@@ -46,20 +42,12 @@ namespace TeamTaskList
 
             if (TaskIsAdded)
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
                 RefreshAddedTask();
-                stopwatch.Stop();
-                ChangeHeader("Added task time: " + stopwatch.Elapsed.ToString());
                 TaskIsAdded = false;
             }
             if (TaskIsEdited)
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
                 RefreshEditedTask();
-                stopwatch.Stop();
-                ChangeHeader("Refresh all after edit: " + stopwatch.Elapsed.ToString());
                 TaskIsEdited = false;
             }
         }
@@ -97,8 +85,6 @@ namespace TeamTaskList
                     }
                 }
             }
-            
-            
         }
 
         private void PopulateGrid()
@@ -179,11 +165,7 @@ namespace TeamTaskList
 
         private void OnRefresh(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
             RefreshAllTasks();
-            stopwatch.Stop();
-            ChangeHeader("Refresh all task time buttonclick: " + stopwatch.Elapsed.ToString());
         }
 
         private async void OnAddTask(object sender, EventArgs e)
@@ -200,9 +182,11 @@ namespace TeamTaskList
             await Navigation.PushAsync(new TaskDetailPage(taskId));
         }
 
-        private void OnSort(object sender, EventArgs e)
+        private async void OnSort(object sender, EventArgs e)
         {
-            PopupNavigation.Instance.PushAsync(new SortPupUp());
+            //For more information: https://www.youtube.com/watch?v=dOU0Qei3Qlk 
+            //And https://github.com/HoussemDellai/Xamarin-Forms-Popup-Demo
+            await PopupNavigation.Instance.PushAsync(new SortPupUp());
         }
     }
 }
